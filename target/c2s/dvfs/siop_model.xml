@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Draft adaptation for Samsung Galaxy A34 5G SM-A346E. Validate limiter names and values against the target kernel/vendor thermal stack before use. -->
 
 <!DOCTYPE siop_document [
 <!ELEMENT siop_document (temperatures, levels, components, scenarios?)>
@@ -151,13 +152,7 @@
             <limiter name="CPUFreqMax" step="0" temp="360" value="-1:1687587:1687587:959765" />
         </scenario>
 
-        <scenario name="Dex" tempType="LRP" priority="1" >
-            <limiter name="CPUFreqMax" step="0" temp="360" value="-1:1687587:1687587:959765" />
-        </scenario>
 
-        <scenario name="DexStabilizerMode" tempType="LRP" priority="4">
-            <limiter name="CPUFreqMax" value="802470" />
-        </scenario>
 
         <scenario name="Heavyuser" tempType="LRP" priority="1" >
             <limiter name="CPUFreqMax" cond="for_temporary" temp="450:480:500" value="-1:1687587:1271689" />
@@ -175,12 +170,10 @@
 
         <scenario name="CameraLiveFocusPreview!Camera_preview_LiveFocusVideo" tempType="LRP" priority="2" >
             <limiter name="GPUFreqMax" step="0" temp="350:380:450:470" value="572000:377000:377000:260000"  />
-            <limiter name="NpuFreqMax" step="0" temp="380:400:430:450" value="-1:800000:666000:533000"  />
-            <limiter name="DncFreqMax" step="0" temp="380:400:430:450" value="-1:666000:666000:533000"  />
         </scenario>
 
         <scenario name="ARemoji:com.samsung.android.aremoji" tempType="LRP" >
-            <limiter name="GPUFreqMax" value="377000" />
+            <!-- GPUFreqMax omitted: verify A346E GPU OPP table before adding a cap. -->
         </scenario>
 
         <scenario name="LowTemp" tempType="BAT" priority="3">
@@ -189,55 +182,15 @@
             <limiter name="Brightness" temp="-150:-70" value="168:-1"      />
         </scenario>
 
-        <scenario name="RetailMode:com.samsung.android.retail.screensaver" tempType="LRP" >
-            <limiter name="Charging" value="70" />
-        </scenario>
 
         <scenario name="SpayClockLimit" tempType="LRP" priority="2" >
              <limiter name="CPUFreqMax" temp="350:380" value="2103486:1687587" />
         </scenario>
 
-        <scenario name="PowerSharing" tempType="LRP" priority="3" >
-             <limiter name="CPUFreqMax" temp="350:380" value="1844882:1687587" />
-             <limiter name="GPUFreqMax" value="377000" />
-        </scenario> 
 
-        <scenario name="HighBrightness"  tempType="LRP*BAT" priority="1" region="XSG" >
-            <limiter name="CpLowMode" temp="440.420:450.430:470.450" value="-1:1:1" delay="0:1800:0" />
-            <limiter name="SADisable" temp="430.420:460.430:480.450" value="-1:1:1" delay="0:1800:0" />
-        </scenario>
 
-        <scenario name="HighBrightness"  tempType="LRP*BAT" priority="1" region="KSA" >
-            <limiter name="CpLowMode" temp="440.420:450.430:470.450" value="-1:1:1" delay="0:1800:0" />
-            <limiter name="SADisable" temp="430.420:460.430:480.450" value="-1:1:1" delay="0:1800:0" />
-        </scenario>
 
-        <scenario_group name="GameThermalCpuControl" tempType="LRP" >
-            <scenario id="-7"  limiter="CPUFreqMax"                     value="703828"  />
-            <scenario id="-6"  limiter="CPUFreqMax" step="0" temp="370:380:400" value="-1:1687587:703828"  />
-            <scenario id="-5"  limiter="CPUFreqMax" step="0" temp="370:380:400" value="-1:1687587:1170380" />
-            <scenario id="-4"  limiter="CPUFreqMax" step="0" temp="370:380:400" value="-1:1687587:1410322" />
-            <scenario id="-3"  limiter="CPUFreqMax" step="0" temp="370:380:400" value="-1:1687587:1479638" />
-            <scenario id="-2"  limiter="CPUFreqMax" step="0" temp="370:380:400" value="-1:1687587:1583613" />
-            <scenario id="-1"  limiter="CPUFreqMax" step="0" temp="370:380:400" value="-1:1687587:1599609" />
-            <scenario id="0"   limiter="CPUFreqMax" step="0" temp="370:380:400" value="-1:1791562:1687587" />
-            <scenario id="1"   limiter="CPUFreqMax" step="0" temp="370:380:400" value="-1:1844882:1791562" />
-            <scenario id="2"   limiter="CPUFreqMax" step="0" temp="370:380:400" value="-1:1930195:1844882" />
-            <scenario id="3"   limiter="CPUFreqMax" step="0" temp="370:380:400" value="-1:2002177:1930195" />
-            <scenario id="4"   limiter="CPUFreqMax"                             value="-1"                 />
-            <scenario name="BackgroundCpuset" temp="380:400:420" value="100:200:300" />
-        </scenario_group>
 
-        <scenario_group name="GameThermalGpuControl" tempType="LRP" >
-            <scenario id="-3" limiter="GPUFreqMax"                     value="156000" />
-            <scenario id="-2" limiter="GPUFreqMax" step="0" temp="370:380:400" value="-1:260000:156000" />
-            <scenario id="-1" limiter="GPUFreqMax" step="0" temp="370:380:400" value="-1:377000:260000" />
-            <scenario id="0"  limiter="GPUFreqMax" step="0" temp="370:380:400" value="-1:455000:377000" />
-            <scenario id="1"  limiter="GPUFreqMax" step="0" temp="370:380:400" value="-1:572000:455000" />
-            <scenario id="2"  limiter="GPUFreqMax" step="0" temp="370:380:400" value="-1:702000:572000" />
-            <scenario id="3"  limiter="GPUFreqMax" step="0" temp="370:380:400" value="-1:800000:702000" />
-            <scenario id="4"  limiter="GPUFreqMax"                             value="-1"               />
-        </scenario_group>
 
     </scenarios>
 
